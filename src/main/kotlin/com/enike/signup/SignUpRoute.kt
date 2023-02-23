@@ -17,7 +17,7 @@ fun Route.signUpRoute(
     hashingService: HashingService,
     userDataSource: UserDataSource,
 ) {
-    post("/signup") {
+    post("signup") {
         val request = kotlin.runCatching { call.receiveNullable<SignUpRequest>() }.getOrNull() ?: kotlin.run {
             call.respond(HttpStatusCode.BadRequest)
             return@post
@@ -30,7 +30,6 @@ fun Route.signUpRoute(
             call.respond(HttpStatusCode.Conflict)
             return@post
         }
-
 
         val saltedHash = hashingService.generateSaltedHash(request.password)
 
@@ -48,6 +47,6 @@ fun Route.signUpRoute(
             return@post
         }
 
-
+        call.respond(HttpStatusCode.OK)
     }
 }
