@@ -25,8 +25,8 @@ fun Application.module() {
         connectionString = "mongodb+srv://richardbraimoh:$mongoPW@cluster0.z3lfqdh.mongodb.net/?retryWrites=true&w=majority"
     ).coroutine.getDatabase(dbName)
 
-
     val userDataSource = MongoUserDataSource(dataBase)
+
     val tokenService = JwtTokenService()
 
     val tokenConfig = TokenConfig(

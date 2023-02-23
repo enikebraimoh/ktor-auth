@@ -1,6 +1,8 @@
 package com.enike.plugins
 
 import com.enike.data.user.UserDataSource
+import com.enike.login.authenticate
+import com.enike.login.getSecretInfo
 import com.enike.login.login
 import com.enike.security.hashing.HashingService
 import com.enike.security.token.TokenConfig
@@ -17,11 +19,9 @@ fun Application.configureRouting(
     tokenConfig: TokenConfig
 ) {
     routing {
-
         signUpRoute(hashingService, userDataSource)
         login(userDataSource, hashingService, tokenService, tokenConfig)
-        get("/") {
-            call.respondText("Hello World!")
-        }
+        authenticate()
+        getSecretInfo()
     }
 }
